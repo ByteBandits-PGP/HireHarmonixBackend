@@ -1,15 +1,19 @@
 package com.bytebandits.hireharmonics.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     @Column(name = "name")
     private String name;
@@ -17,11 +21,11 @@ public class Role {
     @Column(name = "privileges")
     private String privileges;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

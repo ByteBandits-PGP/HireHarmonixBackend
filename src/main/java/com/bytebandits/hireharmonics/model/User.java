@@ -2,6 +2,7 @@ package com.bytebandits.hireharmonics.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,9 +12,10 @@ import java.util.stream.Collectors;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     @Column(name = "user_name")
     private String userName;
@@ -30,11 +32,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles = new ArrayList<>();
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

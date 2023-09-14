@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "applicant_process_step")
 public class ApplicantProcessStep {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "applicant_id")
