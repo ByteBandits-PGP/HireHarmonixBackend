@@ -3,7 +3,7 @@ package com.bytebandits.hireharmonics.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "process_steps")
@@ -17,10 +17,11 @@ public class ProcessStep {
     private String name;
     @Column(name = "step_order")
     private int stepOrder;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "process_id")
     private InterviewProcess interviewProcess;
+    @OneToMany(mappedBy = "process_step")
+    private Set<ApplicantProcessStep> applicantProcessSteps = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -54,4 +55,11 @@ public class ProcessStep {
         this.interviewProcess = interviewProcess;
     }
 
+    public Set<ApplicantProcessStep> getApplicantProcessSteps() {
+        return applicantProcessSteps;
+    }
+
+    public void setApplicantProcessSteps(Set<ApplicantProcessStep> applicantProcessSteps) {
+        this.applicantProcessSteps = applicantProcessSteps;
+    }
 }
