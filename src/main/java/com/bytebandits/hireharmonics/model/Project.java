@@ -1,14 +1,13 @@
 package com.bytebandits.hireharmonics.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
+@Entity
+@Table(name = "projects")
 public class Project {
-
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "uuid-hibernate-generator")

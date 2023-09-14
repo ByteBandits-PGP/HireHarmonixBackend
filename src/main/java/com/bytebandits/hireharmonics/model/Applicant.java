@@ -16,10 +16,14 @@ public class Applicant {
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String email;
+    @Column(name = "contact_number")
     private String contactNumber;
+    @Column(name = "cv_link")
     private String cvLink;
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
