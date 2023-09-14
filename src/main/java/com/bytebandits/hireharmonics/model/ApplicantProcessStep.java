@@ -6,19 +6,17 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "applicant_process_step")
 public class ApplicantProcessStep {
-<<<<<<< Updated upstream
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-=======
->>>>>>> Stashed changes
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "process_step_id")
     private ProcessStep processStep;
 

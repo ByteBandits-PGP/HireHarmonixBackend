@@ -4,6 +4,8 @@ package com.bytebandits.hireharmonics.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -15,7 +17,6 @@ public class Applicant {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -28,6 +29,8 @@ public class Applicant {
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "applicant")
+    private Set<ApplicantProcessStep> applicantProcessSteps = new HashSet<>();
 
     public UUID getId() {
         return id;
@@ -83,5 +86,13 @@ public class Applicant {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<ApplicantProcessStep> getApplicantProcessSteps() {
+        return applicantProcessSteps;
+    }
+
+    public void setApplicantProcessSteps(Set<ApplicantProcessStep> applicantProcessSteps) {
+        this.applicantProcessSteps = applicantProcessSteps;
     }
 }
