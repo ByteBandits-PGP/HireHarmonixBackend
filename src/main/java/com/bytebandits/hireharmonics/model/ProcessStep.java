@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
+@Entity
+@Table(name = "process_steps")
 public class ProcessStep {
 
     @Id
@@ -12,9 +14,8 @@ public class ProcessStep {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
     private String name;
-
+    @Column(name = "step_order")
     private int stepOrder;
 
     @ManyToOne(optional = false)

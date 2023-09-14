@@ -16,7 +16,6 @@ public class Skill {
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;

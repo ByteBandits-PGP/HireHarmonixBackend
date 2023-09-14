@@ -14,8 +14,9 @@ public class Qualification {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-
     private String type;
+    private String level;
+    private String place;
 
     @Column(name = "start_year")
     private Integer startYear;
@@ -25,9 +26,6 @@ public class Qualification {
     @ManyToOne(optional = false)
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;
-
-    private String level;
-    private String place;
 
     @Transient
     public Integer getValue() {
