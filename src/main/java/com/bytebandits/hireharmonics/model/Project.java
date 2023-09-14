@@ -16,6 +16,11 @@ public class Project {
 
     private String name;
 
+    private String description;
+
+    @Column(name = "technologies_used")
+    private String technologiesUsed;
+
     public UUID getId() {
         return id;
     }
@@ -30,5 +35,21 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTechnologiesUsed() {
+        return technologiesUsed;
+    }
+
+    public void setTechnologiesUsed(String technologiesUsed) {
+        this.technologiesUsed = technologiesUsed;
     }
 }
