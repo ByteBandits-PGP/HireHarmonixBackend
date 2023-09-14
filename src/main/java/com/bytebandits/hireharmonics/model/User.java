@@ -29,9 +29,6 @@ public class User {
     @Column(name = "active_status")
     private boolean activeStatus;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserRole> userRoles = new ArrayList<>();
-
     public UUID getId() {
         return id;
     }
@@ -72,10 +69,4 @@ public class User {
         this.activeStatus = activeStatus;
     }
 
-    public Set<Role> getRoles() {
-        return userRoles
-                .stream()
-                .map(ur -> ur.getRole())
-                .collect(Collectors.toSet());
-    }
 }
