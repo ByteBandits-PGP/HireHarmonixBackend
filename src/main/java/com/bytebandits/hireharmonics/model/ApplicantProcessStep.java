@@ -1,20 +1,11 @@
 package com.bytebandits.hireharmonics.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "applicant_process_step")
 public class ApplicantProcessStep {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "uuid-hibernate-generator")
-    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "applicant_id")
@@ -33,14 +24,6 @@ public class ApplicantProcessStep {
 
     @Column(name = "done_by")
     private String doneBy;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public Applicant getApplicant() {
         return applicant;
