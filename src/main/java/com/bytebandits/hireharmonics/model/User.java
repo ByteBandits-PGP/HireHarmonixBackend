@@ -4,8 +4,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -24,10 +24,20 @@ public class User {
     private String password;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "active_status")
-    private boolean activeStatus;
+    private String activeStatus;
+
+    public User() {
+    }
+
+    public User(String userName, String password, LocalDateTime createdDate, String activeStatus) {
+        this.userName = userName;
+        this.password = password;
+        this.createdDate = createdDate;
+        this.activeStatus = activeStatus;
+    }
 
     public UUID getId() {
         return id;
@@ -53,20 +63,19 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public boolean isActiveStatus() {
+    public String getActiveStatus() {
         return activeStatus;
     }
 
-    public void setActiveStatus(boolean activeStatus) {
+    public void setActiveStatus(String activeStatus) {
         this.activeStatus = activeStatus;
     }
-
 }

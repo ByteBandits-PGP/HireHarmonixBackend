@@ -3,7 +3,7 @@ package com.bytebandits.hireharmonics.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -25,7 +25,16 @@ public class UserRole {
     private Role role;
 
     @Column(name = "assigned_day")
-    private Date assignedDay;
+    private LocalDateTime assignedDay;
+
+    public UserRole() {
+    }
+
+    public UserRole(User user, Role role, LocalDateTime assignedDay) {
+        this.user = user;
+        this.role = role;
+        this.assignedDay = assignedDay;
+    }
 
     public UUID getId() {
         return id;
@@ -51,11 +60,11 @@ public class UserRole {
         this.role = role;
     }
 
-    public Date getAssignedDay() {
+    public LocalDateTime getAssignedDay() {
         return assignedDay;
     }
 
-    public void setAssignedDay(Date assignedDay) {
+    public void setAssignedDay(LocalDateTime assignedDay) {
         this.assignedDay = assignedDay;
     }
 }
