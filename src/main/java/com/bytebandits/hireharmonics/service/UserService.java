@@ -6,6 +6,7 @@ import com.bytebandits.hireharmonics.model.UserRole;
 import com.bytebandits.hireharmonics.repository.UserRepository;
 import com.bytebandits.hireharmonics.repository.UserRoleRepository;
 import com.bytebandits.hireharmonics.util.RandomPasswordGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,15 +20,19 @@ public class UserService {
     private UserRepository userRepository;
     private RoleService roleService;
     private UserRoleRepository userRoleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, RoleService roleService, UserRoleRepository userRoleRepository) {
+    public UserService(UserRepository userRepository, RoleService roleService, UserRoleRepository userRoleRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.userRoleRepository = userRoleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(String email, List<String> roleNames) {
-        User user = new User(email, generateRandomPassword(), LocalDateTime.now(), "NEW");
+        String password = passwordEncoder.encode(generateRandomPassword());
+
+        User user = new User(email, password);
         userRepository.save(user);
         createUserRoleEntities(user, roleNames);
         return user;

@@ -3,13 +3,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id")
@@ -27,16 +31,19 @@ public class User {
     private LocalDateTime createdDate;
 
     @Column(name = "active_status")
-    private String activeStatus;
+    private boolean activeStatus;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserRole> userRoles = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String userName, String password, LocalDateTime createdDate, String activeStatus) {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.createdDate = createdDate;
-        this.activeStatus = activeStatus;
+        this.createdDate = LocalDateTime.now();
+        this.activeStatus = true;
     }
 
     public UUID getId() {
@@ -71,11 +78,48 @@ public class User {
         this.createdDate = createdDate;
     }
 
-    public String getActiveStatus() {
+    public boolean isActiveStatus() {
         return activeStatus;
     }
 
-    public void setActiveStatus(String activeStatus) {
+    public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
+    }
+
+    public Set<Role> getRoles() {
+        return userRoles
+                .stream()
+                .map(ur -> ur.getRole())
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return activeStatus;
     }
 }

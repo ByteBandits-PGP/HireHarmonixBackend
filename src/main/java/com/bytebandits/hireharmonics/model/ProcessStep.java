@@ -20,7 +20,7 @@ public class ProcessStep {
     @ManyToOne(optional = false)
     @JoinColumn(name = "process_id")
     private InterviewProcess interviewProcess;
-    @OneToMany(mappedBy = "process_step")
+    @OneToMany(mappedBy = "processStep")
     private Set<ApplicantProcessStep> applicantProcessSteps = new HashSet<>();
 
     public UUID getId() {

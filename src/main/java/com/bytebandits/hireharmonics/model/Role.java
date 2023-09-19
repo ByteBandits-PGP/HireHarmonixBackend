@@ -2,12 +2,13 @@ package com.bytebandits.hireharmonics.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @Column(name = "name")
@@ -30,5 +31,10 @@ public class Role {
 
     public void setActions(String actions) {
         this.actions = actions;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
