@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "created_date")
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "active_status")
     private boolean activeStatus;
@@ -41,7 +42,7 @@ public class User implements UserDetails {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.createdDate = LocalDate.now();
+        this.createdDate = LocalDateTime.now();
         this.activeStatus = true;
     }
 
@@ -69,11 +70,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

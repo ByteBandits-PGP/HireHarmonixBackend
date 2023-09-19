@@ -1,15 +1,16 @@
 package com.bytebandits.hireharmonics.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.bytebandits.hireharmonics.service.ApplicantService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/applicant")
 public class ApplicantController {
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
+    private ApplicantService applicantService;
+
+    public ApplicantController(ApplicantService applicantService) {
+        this.applicantService = applicantService;
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
-        User user = userService.registerUser(userDTO);
+        User user = userService.createUser(userDTO.email(), List.of("Admin"));
         return ResponseEntity.ok("User registered successfully");
     }
     @PostMapping("/login")

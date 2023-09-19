@@ -19,11 +19,26 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "job_title")
+    private String jobTitle;
+    private String email;
+    @Column(name = "contact_number")
     private String contactNumber;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Employee() {
+    }
+
+    public Employee(String firstName, String lastName, String jobTitle, String email, String contactNumber, User user) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.user = user;
+    }
 
     public UUID getId() {
         return id;
@@ -47,6 +62,22 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContactNumber() {
