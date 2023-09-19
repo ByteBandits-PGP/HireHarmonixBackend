@@ -10,24 +10,11 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(generator = "uuid-hibernate-generator")
-    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
-
     @Column(name = "name")
     private String name;
 
-    @Column(name = "privileges")
-    private String privileges;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    @Column(name = "actions")
+    private String actions;
 
     public String getName() {
         return name;
@@ -37,11 +24,11 @@ public class Role {
         this.name = name;
     }
 
-    public String getPrivileges() {
-        return privileges;
+    public String getActions() {
+        return actions;
     }
 
-    public void setPrivileges(String privileges) {
-        this.privileges = privileges;
+    public void setActions(String actions) {
+        this.actions = actions;
     }
 }
