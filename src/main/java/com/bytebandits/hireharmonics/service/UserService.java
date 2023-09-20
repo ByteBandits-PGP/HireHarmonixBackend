@@ -29,10 +29,10 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User createUser(String email, List<String> roleNames) {
-        String password = passwordEncoder.encode(generateRandomPassword());
+    public User createUser(String email, String password, List<String> roleNames) {
+        String encodedPassword = passwordEncoder.encode(password);
 
-        User user = new User(email, password);
+        User user = new User(email, encodedPassword);
         userRepository.save(user);
         createUserRoleEntities(user, roleNames);
         return user;

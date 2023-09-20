@@ -24,7 +24,7 @@ public class EmployeeService {
     }
 
     public UUID createEmployee(EmployeeRequestDto dto) {
-        User user = userService.createUser(dto.email(), dto.roles());
+        User user = userService.createUser(dto.email(),"", dto.roles());
         Employee employee = converter.fromEmployeeRequestDto(dto, user);
         employeeRepository.save(employee);
         return employee.getId();
