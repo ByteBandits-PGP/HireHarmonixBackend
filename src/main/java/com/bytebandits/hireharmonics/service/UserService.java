@@ -6,12 +6,14 @@ import com.bytebandits.hireharmonics.model.UserRole;
 import com.bytebandits.hireharmonics.repository.UserRepository;
 import com.bytebandits.hireharmonics.repository.UserRoleRepository;
 import com.bytebandits.hireharmonics.util.RandomPasswordGenerator;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -54,6 +56,15 @@ public class UserService {
 
     public Boolean validatePassword() {
         return false;
+    }
+
+    public Set<Role> findUserRole(String userName) {
+        User user = userRepository.findByUserName(userName);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user.getRoles();
     }
 
 }

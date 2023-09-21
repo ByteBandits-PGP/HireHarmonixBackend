@@ -67,4 +67,14 @@ public class UserRole {
     public void setAssignedDay(LocalDateTime assignedDay) {
         this.assignedDay = assignedDay;
     }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", user=" + user.getUserName() +
+                ", role=" + role.getName() +
+                ", assignedDay=" + assignedDay +
+                '}';
+    }
 }
