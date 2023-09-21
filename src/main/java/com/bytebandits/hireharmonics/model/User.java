@@ -122,4 +122,16 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return activeStatus;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", createdDate=" + createdDate +
+                ", activeStatus=" + activeStatus +
+                ", userRoles=" + userRoles +
+                '}';
+    }
 }

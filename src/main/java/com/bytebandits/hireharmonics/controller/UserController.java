@@ -1,6 +1,7 @@
 package com.bytebandits.hireharmonics.controller;
 
 import com.bytebandits.hireharmonics.dto.UserDTO;
+import com.bytebandits.hireharmonics.model.Role;
 import com.bytebandits.hireharmonics.model.User;
 import com.bytebandits.hireharmonics.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/user")
@@ -50,7 +52,7 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Set<Role>> login(@RequestBody UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userDTO.email(), userDTO.password()));
 
@@ -59,7 +61,9 @@ public class UserController {
         context.setAuthentication(authentication);
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
-        return ResponseEntity.ok("Login successful");
+
+        Set<Role> roleName = userService.findUserRole(userDTO.email());
+        return ResponseEntity.ok(roleName);
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
