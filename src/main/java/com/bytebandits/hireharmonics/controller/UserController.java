@@ -1,6 +1,7 @@
 package com.bytebandits.hireharmonics.controller;
 
 import com.bytebandits.hireharmonics.dto.UserDTO;
+import com.bytebandits.hireharmonics.dto.response.LoginResponseDto;
 import com.bytebandits.hireharmonics.model.Role;
 import com.bytebandits.hireharmonics.model.User;
 import com.bytebandits.hireharmonics.service.UserService;
@@ -52,7 +53,7 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
     @PostMapping("/login")
-    public ResponseEntity<Set<Role>> login(@RequestBody UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody UserDTO userDTO, HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userDTO.email(), userDTO.password()));
 
@@ -62,8 +63,11 @@ public class UserController {
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
+        String jsessionId = response.getHeader("Set-Cookie").split(";")[0].split("=")[1];
+
         Set<Role> roleName = userService.findUserRole(userDTO.email());
-        return ResponseEntity.ok(roleName);
+
+        return ResponseEntity.ok(new LoginResponseDto(roleName, jsessionId));
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {

@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -11,12 +12,15 @@ import java.io.IOException;
 @Component
 public class ManualCorsFilter extends OncePerRequestFilter {
 
+    @Value("${frontend.url}")
+    private String frontendUrl;
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
 
 
-        httpServletResponse.addHeader("Access-Control-Allow-Origin","*");
+        httpServletResponse.addHeader("Access-Control-Allow-Origin",frontendUrl);
         httpServletResponse.addHeader("Access-Control-Allow-Methods","GET, POST, PUT, PATCH, DELETE, OPTIONS");
         httpServletResponse.addHeader("Access-Control-Allow-Credentials","true");
         httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
