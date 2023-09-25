@@ -8,6 +8,8 @@ public class HireharmonicsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HireharmonicsApplication.class, args);
+
+
 	}
 
 }
