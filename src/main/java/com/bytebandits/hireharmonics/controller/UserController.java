@@ -2,9 +2,11 @@ package com.bytebandits.hireharmonics.controller;
 
 import com.bytebandits.hireharmonics.dto.UserDTO;
 import com.bytebandits.hireharmonics.dto.response.LoginResponseDto;
+import com.bytebandits.hireharmonics.dto.response.UserResponseDto;
 import com.bytebandits.hireharmonics.model.Role;
 import com.bytebandits.hireharmonics.model.User;
 import com.bytebandits.hireharmonics.service.UserService;
+import com.bytebandits.hireharmonics.util.Converter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,6 @@ public class UserController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-
     private PasswordEncoder passwordEncoder;
 
     private SecurityContextRepository securityContextRepository =
@@ -78,5 +79,13 @@ public class UserController {
     public String testing() {
         return "Hello";
     }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+        List<User> allUsers = userService.getAllUsers();
+        List<UserResponseDto> userResponseDtos = Converter.toUserResponseDtoList(allUsers);
+        return ResponseEntity.ok(userResponseDtos);
+    }
+
 }
 

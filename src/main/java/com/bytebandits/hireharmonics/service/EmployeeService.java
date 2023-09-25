@@ -12,20 +12,17 @@ import java.util.UUID;
 @Service
 public class EmployeeService {
 
-    private UserService userService;
-    private EmployeeRepository employeeRepository;
+    private final UserService userService;
+    private final EmployeeRepository employeeRepository;
 
-    private Converter converter;
-
-    public EmployeeService(UserService userService, EmployeeRepository employeeRepository, Converter converter) {
+    public EmployeeService(UserService userService, EmployeeRepository employeeRepository) {
         this.userService = userService;
         this.employeeRepository = employeeRepository;
-        this.converter = converter;
     }
 
     public UUID createEmployee(EmployeeRequestDto dto) {
         User user = userService.createUser(dto.email(),"", dto.roles());
-        Employee employee = converter.fromEmployeeRequestDto(dto, user);
+        Employee employee = Converter.fromEmployeeRequestDto(dto, user);
         employeeRepository.save(employee);
         return employee.getId();
     }

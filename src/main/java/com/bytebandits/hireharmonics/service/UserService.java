@@ -33,7 +33,6 @@ public class UserService {
 
     public User createUser(String email, String password, List<String> roleNames) {
         String encodedPassword = passwordEncoder.encode(password);
-
         User user = new User(email, encodedPassword);
         userRepository.save(user);
         createUserRoleEntities(user, roleNames);
@@ -65,6 +64,10 @@ public class UserService {
         }
 
         return user.getRoles();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
 }
