@@ -13,4 +13,6 @@ public class ApplicantService {
         this.userService = userService;
         this.applicantRepository = applicantRepository;
     }
+
+
 }

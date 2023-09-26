@@ -21,11 +21,30 @@ public class Applicant {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
     @Column(name = "contact_number")
     private String contactNumber;
+    @Column(name = "skills")
+    private String skills;
     @Column(name = "cv_link")
     private String cvLink;
+    @Column(name = "location")
+    private String location;
+    @Column(name = "bootcamp")
+    private String bootcamp;
+
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
+    private Set<WorkExperience> workExperiences = new HashSet<>();
+
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
+    private Set<Education> educations = new HashSet<>();
+
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
+    private Set<Project> project = new HashSet<>();
+
+    @Column(name = "language")
+    private String language;
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;

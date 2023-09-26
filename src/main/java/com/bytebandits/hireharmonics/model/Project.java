@@ -6,20 +6,23 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 
 @Entity
-@Table(name = "projects")
+@Table(name = "project")
 public class Project {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    @Column(name = "project_name")
+    private String projectName;
 
-    private String name;
+    @Column(name = "technologies")
+    private String technologies;
 
-    private String description;
-
-    @Column(name = "technologies_used")
-    private String technologiesUsed;
+    @ManyToOne
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
 
     public UUID getId() {
         return id;
@@ -29,27 +32,19 @@ public class Project {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTechnologies() {
+        return technologies;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTechnologiesUsed() {
-        return technologiesUsed;
-    }
-
-    public void setTechnologiesUsed(String technologiesUsed) {
-        this.technologiesUsed = technologiesUsed;
+    public void setTechnologies(String technologies) {
+        this.technologies = technologies;
     }
 }
