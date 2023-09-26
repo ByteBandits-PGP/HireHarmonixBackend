@@ -21,11 +21,29 @@ public class Applicant {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
     @Column(name = "contact_number")
     private String contactNumber;
+    @Column(name = "skills")
+    private String skills;
     @Column(name = "cv_link")
     private String cvLink;
+    @Column(name = "location")
+    private String location;
+    @Column(name = "bootcamp")
+    private String bootcamp;
+
+    @Column(name = "work_experience")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<WorkExperience> workExperiences = new HashSet<>();
+
+    @Column(name = "education")
+    private Set<Education> educations = new HashSet<>();
+    @Column(name = "projects")
+    private Set<Projects> projects = new HashSet<>();
+    @Column(name = "language")
+    private String language;
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
