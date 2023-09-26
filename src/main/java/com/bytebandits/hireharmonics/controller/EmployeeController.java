@@ -2,6 +2,7 @@ package com.bytebandits.hireharmonics.controller;
 
 import com.bytebandits.hireharmonics.dto.request.EmployeeRequestDto;
 import com.bytebandits.hireharmonics.service.EmployeeService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/employee")
+@RequestMapping(value = "/api/employee")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -20,8 +21,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createEmployee(@RequestBody EmployeeRequestDto dto) {
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> createEmployee( EmployeeRequestDto dto) {
         UUID employeeId = employeeService.createEmployee(dto);
         return ResponseEntity.ok("Employee created successfully with ID " + employeeId);
     }
