@@ -40,8 +40,8 @@ public class Applicant {
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
     private Set<Education> educations = new HashSet<>();
 
-  //  @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
-  //  private Set<Projects> projects = new HashSet<>();
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
+    private Set<Projects> projects = new HashSet<>();
 
     @Column(name = "language")
     private String language;
