@@ -15,6 +15,10 @@ public class Education {
     @Column(name = "institute")
     private String institute;
 
+    @ManyToOne
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
+
     public Long getId() {
         return id;
     }

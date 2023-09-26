@@ -34,15 +34,15 @@ public class Applicant {
     @Column(name = "bootcamp")
     private String bootcamp;
 
-    @Column(name = "work_experience")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
     private Set<WorkExperience> workExperiences = new HashSet<>();
 
-    @Column(name = "education")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
     private Set<Education> educations = new HashSet<>();
-    @Column(name = "projects")
-    private Set<Projects> projects = new HashSet<>();
+
+  //  @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
+  //  private Set<Projects> projects = new HashSet<>();
+
     @Column(name = "language")
     private String language;
     @OneToOne(optional = false)

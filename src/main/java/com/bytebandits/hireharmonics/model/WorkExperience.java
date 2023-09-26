@@ -17,6 +17,10 @@ public class WorkExperience {
     @Column(name = "yearsOfExperience")
     private String yearsOfExperience;
 
+    @ManyToOne
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
+
     public Long getId() {
         return id;
     }
