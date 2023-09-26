@@ -41,7 +41,7 @@ public class Applicant {
     private Set<Education> educations = new HashSet<>();
 
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL)
-    private Set<Projects> projects = new HashSet<>();
+    private Set<Project> project = new HashSet<>();
 
     @Column(name = "language")
     private String language;

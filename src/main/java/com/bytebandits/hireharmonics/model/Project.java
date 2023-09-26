@@ -6,8 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 
 @Entity
-@Table(name = "projects")
-public class Projects {
+@Table(name = "project")
+public class Project {
 
     @Id
     @Column(name = "id")
