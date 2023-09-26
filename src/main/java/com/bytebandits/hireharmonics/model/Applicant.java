@@ -39,6 +39,7 @@ public class Applicant {
     private Set<WorkExperience> workExperiences = new HashSet<>();
 
     @Column(name = "education")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Education> educations = new HashSet<>();
     @Column(name = "projects")
     private Set<Projects> projects = new HashSet<>();
