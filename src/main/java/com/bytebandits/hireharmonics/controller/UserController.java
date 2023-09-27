@@ -64,7 +64,10 @@ public class UserController {
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
-        String jsessionId = response.getHeader("Set-Cookie").split(";")[0].split("=")[1];
+        String jsessionId = null;
+        if (response.getHeader("Set-Cookie") != null) {
+            jsessionId = response.getHeader("Set-Cookie").split(";")[0].split("=")[1];
+        }
 
         Set<Role> roleName = userService.findUserRole(userDTO.email());
 
