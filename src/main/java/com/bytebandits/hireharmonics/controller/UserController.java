@@ -65,6 +65,7 @@ public class UserController {
         securityContextRepository.saveContext(context, request, response);
 
         String jsessionId = null;
+
         if (response.getHeader("Set-Cookie") != null) {
             jsessionId = response.getHeader("Set-Cookie").split(";")[0].split("=")[1];
         }
