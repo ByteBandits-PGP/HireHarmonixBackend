@@ -67,11 +67,13 @@ public class UserController {
         String jsessionId = null;
         if (response.getHeader("Set-Cookie") != null) {
             jsessionId = response.getHeader("Set-Cookie").split(";")[0].split("=")[1];
-        }
+        }// no need for this code spring will handle the cookie it sets it self.
+            // if you want to read session id in frontend you can read the cookie
 
         Set<Role> roleName = userService.findUserRole(userDTO.email());
 
         return ResponseEntity.ok(new LoginResponseDto(roleName, jsessionId));
+        // its going in to the header, why we are sent it like that?
     }
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
