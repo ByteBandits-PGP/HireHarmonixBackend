@@ -13,7 +13,7 @@ public class UploadCVService {
 
     private final String bucketName;
     private final S3Client s3Client;
-    public UploadCVService(S3Client s3Client, @Value("s3.bucket.name") String bucketName) {
+    public UploadCVService(S3Client s3Client, @Value("${s3.bucket.name}") String bucketName) {
         this.s3Client= s3Client;
         this.bucketName= bucketName;
     }
